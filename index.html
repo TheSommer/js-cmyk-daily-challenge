@@ -13,29 +13,34 @@
         <h1 class="text-3xl font-bold mb-6">CMYK Daily Challenge</h1>
 
         <div class="flex justify-between gap-2 mb-4">
+            <!-- Cyan -->
             <div class="flex-1">
-                <label id="labelC" for="cInput" class="block text-sm font-medium mb-1 text-xl"></label>
+                <div id="labelC" class="flex items-center justify-center gap-1 text-xl mb-1 h-6"></div>
                 <input id="cInput" type="number" min="0" max="100" placeholder="C"
                     class="w-full px-2 py-2 rounded bg-cyan-100 text-black focus:outline-none focus:ring-2 focus:ring-cyan-500" />
             </div>
+
+            <!-- Magenta -->
             <div class="flex-1">
-                <label id="labelM" for="mInput" class="block text-sm font-medium mb-1 text-xl"></label>
+                <div id="labelM" class="flex items-center justify-center gap-1 text-xl mb-1 h-6"></div>
                 <input id="mInput" type="number" min="0" max="100" placeholder="M"
                     class="w-full px-2 py-2 rounded bg-pink-200 text-black focus:outline-none focus:ring-2 focus:ring-pink-500" />
             </div>
+
+            <!-- Yellow -->
             <div class="flex-1">
-                <label id="labelY" for="yInput" class="block text-sm font-medium mb-1 text-xl"></label>
+                <div id="labelY" class="flex items-center justify-center gap-1 text-xl mb-1 h-6"></div>
                 <input id="yInput" type="number" min="0" max="100" placeholder="Y"
                     class="w-full px-2 py-2 rounded bg-yellow-100 text-black focus:outline-none focus:ring-2 focus:ring-yellow-500" />
             </div>
+
+            <!-- Black -->
             <div class="flex-1">
-                <label id="labelK" for="kInput" class="block text-sm font-medium mb-1 text-xl"></label>
+                <div id="labelK" class="flex items-center justify-center gap-1 text-xl mb-1 h-6"></div>
                 <input id="kInput" type="number" min="0" max="100" placeholder="K"
                     class="w-full px-2 py-2 rounded bg-gray-300 text-black focus:outline-none focus:ring-2 focus:ring-gray-700" />
             </div>
         </div>
-
-
 
         <button id="guessBtn" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 rounded">
             Guess
@@ -44,7 +49,7 @@
         <p id="result" class="mt-4 text-sm text-gray-300"></p>
     </div>
 
-    <script src="app.js"></script>
+    <script src="app.v1.js"></script>
 </body>
 
 </html>
