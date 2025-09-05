@@ -20,32 +20,40 @@ function cmykToRgb(c, m, y, k) {
 }
 
 function getTodaySeed() {
-  const today = new Date().toISOString().slice(0, 10);
+  const d = new Date();
+  const today =
+    d.getFullYear() + "-" +
+    String(d.getMonth() + 1).padStart(2, "0") + "-" +
+    String(d.getDate()).padStart(2, "0");
+
   let hash = 0;
   for (let i = 0; i < today.length; i++) {
     hash = (hash << 5) - hash + today.charCodeAt(i);
-    hash |= 0; // 32-bit int conversion
+    hash |= 0;
   }
   return Math.abs(hash);
 }
 
-function seededRandom(seed) {
-  return function () {
-    seed = (seed * 1664525 + 1013904223) % 4294967296; // (seed * a + c) % 2^32
-    return seed / 4294967296;
+function mulberry32(a) {
+  return function() {
+    let t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 }
 
 function getDailyCMYK() {
-  const seed = getTodaySeed();
-  const rand = seededRandom(seed);
+  const rand = mulberry32(getTodaySeed());
+  let c = Math.floor(rand() * 101);
+  let m = Math.floor(rand() * 101);
+  let y = Math.floor(rand() * 101);
 
-  return {
-    c: Math.floor(rand() * 101),
-    m: Math.floor(rand() * 101),
-    y: Math.floor(rand() * 101),
-    k: Math.floor(rand() * 101)
-  };
+  // Limit K based on CMY so we don't double-darken
+  const baseK = Math.min(c, m, y);
+  const k = Math.floor((baseK * 0.4) * rand()); // 0..~40%
+
+  return { c, m, y, k };
 }
 
 function getRandomCMYK() {
